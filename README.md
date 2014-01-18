@@ -1,4 +1,4 @@
-site
+Welcome to my homepage!
 ====
 
-My home on the internetz
+Made with Frontpage 2000
