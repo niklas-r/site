@@ -1,25 +1,48 @@
 'use strict';
 
 module.exports = function (grunt) {
+  var globals = {
+    src: 'src',
+    dist: 'dist'
+  };
+
   grunt.initConfig({
+    globals: globals,
     pkg: grunt.file.readJSON('package.json'),
+
+    watch: {
+      livereload: {
+        // Here we watch the files the less/assemble tasks will compile to
+        // These files are sent to the live reload server after less/assemble compiles to them
+        options: { livereload: true },
+        files: ['dist/**/*'],
+      },
+      templates: {
+        files: ['<%= globals.src %>/**/*.hbs', '<%= globals.src %>/**/*.md', '<%= globals.src %>/**/*.json'],
+        tasks: ['newer:assemble']
+      },
+      styles: {
+        files: ['<%= globals.src %>/assets/styles/less/**/*.less'],
+        tasks: ['less:dev']
+      }
+    },
 
     //////////////
     // Assemble //
     //////////////
     assemble: {
       options: {
-        assets: 'dist/assets',
-        data: ['src/templates/data/*.{json,yml}'],
+        assets: '<%= globals.dist %>/assets',
+        data: ['<%= globals.src %>/templates/data/*.{json,yml}'],
         flatten: true,
-        helpers: ['src/templates/helpers/helper-*.js'],
+        helpers: ['<%= globals.src %>/templates/helpers/helper-*.js'],
         layout: 'default.hbs',
-        layoutdir: 'src/templates/layouts',
-        partials: ['src/templates/includes/**/*.hbs']
+        layoutdir: '<%= globals.src %>/templates/layouts',
+        partials: ['<%= globals.src %>/templates/includes/**/*.hbs']
       },
       pages: {
         files: {
-          'dist/': ['src/templates/*.hbs']
+          '<%= globals.dist %>/': ['<%= globals.src %>/templates/*.hbs']
         }
       },
       posts: {
@@ -27,7 +50,7 @@ module.exports = function (grunt) {
           layout: 'blog.hbs'
         },
         files: {
-          'dist/blog/': ['src/templates/posts/*.md']
+          '<%= globals.dist %>/blog/': ['<%= globals.src %>/templates/posts/*.md']
         }
       }
     },
@@ -38,20 +61,20 @@ module.exports = function (grunt) {
     less: {
       dev: {
         options: {
-          paths: 'src/assets/styles/less',
+          paths: '<%= globals.src %>/assets/styles/less',
           sourceMap: true
         },
         files: {
-          'dist/assets/styles/main.css': 'src/assets/styles/less/main.less'
+          '<%= globals.dist %>/assets/styles/main.css': '<%= globals.src %>/assets/styles/less/main.less'
         }
       },
       prod: {
         options: {
-          paths: 'src/assets/styles/less',
+          paths: '<%= globals.src %>/assets/styles/less',
           cleancss: true
         },
         files: {
-          'dist/assets/styles/main.css': 'src/assets/styles/less/main.less'
+          '<%= globals.dist %>/assets/styles/main.css': '<%= globals.src %>/assets/styles/less/main.less'
         }
       }
     },
@@ -61,10 +84,13 @@ module.exports = function (grunt) {
     /////////////
     connect: {
       server: {
-        port: 8000,
-        livereload: true,
-        keepalive: true,
-        directory: 'dist'
+        options: {
+          port: 8000,
+          livereload: true,
+          keepalive: true,
+          open: true,
+          base: '<%= globals.dist %>/'
+        }
       }
     }
   });
@@ -80,4 +106,5 @@ module.exports = function (grunt) {
 
   // Register tasks
   grunt.registerTask('default', ['newer:assemble', 'less:dev']);
+  grunt.registerTask('serve', ['connect']);
 };
