@@ -1,5 +1,4 @@
 *.sublime-workspace
-node_modules/
-bower_components/
-dist/*
-!dist/.gitkeep
+node_modules
+bower_components
+dist
