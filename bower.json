@@ -8,6 +8,7 @@
   "description": "My very own homepage",
   "private": true,
   "dependencies": {
-    "normalize.css": "~3.0.2"
+    "normalize.css": "~3.0.2",
+    "lodash": "~3.4.0"
   }
 }

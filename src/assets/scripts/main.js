@@ -1,6 +1,11 @@
-(function (window, undefined) {
+(function (NR, undefined) {
   'use strict';
+  var heroFader;
 
-  console.log("RUNNING");
+  heroFader = document.getElementById('hero-fader');
 
-}(window));
+  if ( heroFader ) {
+    NR.heroFader.init(heroFader);
+  }
+
+}(window.NR = window.NR || {}));

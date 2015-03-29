@@ -36,6 +36,9 @@ module.exports = function (grunt) {
         tasks: ['sass:build', 'autoprefixer:build']
       },
       scripts: {
+        options: {
+          livereload: true
+        },
         files: ['<%= copy.js.cwd %>/**/*.js'],
         tasks: ['copy:js']
       }
@@ -120,9 +123,9 @@ module.exports = function (grunt) {
       js: {
         expand: true,
         filter: 'isFile',
-        cwd: '<%= globals.src %>/assets/scripts/',
-        src: '**/*.js',
-        dest: '<%= globals.dist %>/assets/scripts/'
+        cwd: '<%= globals.src %>/assets/',
+        src: ['scripts/**/*.js', 'plugins/**/*.js'],
+        dest: '<%= globals.dist %>/assets/'
       },
       bower: {
         expand: true,

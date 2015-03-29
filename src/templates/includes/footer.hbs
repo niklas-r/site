@@ -1,14 +1,22 @@
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
-      // (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      //   function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      // e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      // e.src='//www.google-analytics.com/analytics.js';
-      // r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      // (function(n,i,k,l,a,s){n.GoogleAnalyticsObject=l;n[l]||(n[l]=
+      //   function(){(n[l].q=n[l].q||[]).push(arguments)});n[l].l=+new Date;
+      // a=i.createElement(k);s=i.getElementsByTagName(k)[0];
+      // a.src='//www.google-analytics.com/analytics.js';
+      // s.parentNode.insertBefore(a,s)}(window,document,'script','ga'));
       // ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
     <!-- build:js {{assets}}/scripts/main.min.js -->
+    <script src="{{assets}}/bower_components/lodash/lodash.js"></script>
+
+    <script src="{{assets}}/plugins/DitheredGradient/DitheredLinearGradientRGB.js"></script>
+
+    <script src="{{assets}}/scripts/requestAnimFrame.js"></script>
+    <script src="{{assets}}/scripts/debug.js"></script>
+    <script src="{{assets}}/scripts/hero-fader-colors.js"></script>
+    <script src="{{assets}}/scripts/hero-fader.js"></script>
     <script src="{{assets}}/scripts/main.js"></script>
     <!-- endbuild -->
 
