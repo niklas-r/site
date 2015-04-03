@@ -120,11 +120,11 @@ module.exports = function (grunt) {
     },
 
     copy: {
-      js: {
+      assets: {
         expand: true,
         filter: 'isFile',
         cwd: '<%= globals.src %>/assets/',
-        src: ['scripts/**/*.js', 'plugins/**/*.js'],
+        src: ['**', '!**/styles/**'],
         dest: '<%= globals.dist %>/assets/'
       },
       bower: {
